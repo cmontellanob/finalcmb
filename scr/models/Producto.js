@@ -1,4 +1,4 @@
-// producto.js
+// Producto.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('./sequelize'); // Importa la instancia de Sequelize
 const Usuario = require('./usuario'); // Importa el modelo Usuario
