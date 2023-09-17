@@ -1,9 +1,10 @@
+
 import { Usuario } from '../models/Usuario.js';
 
 export async function getUsuarios(req, res) {
   try {
     const Usuarios = await Usuario.findAll({
-      attributes: ['id', 'projectId', 'name', 'done'],
+      attributes: ['id', 'nombre', 'correo', 'contrasena','estado'],
       order: [['id', 'DESC']],
     });
 
@@ -16,12 +17,13 @@ export async function getUsuarios(req, res) {
 }
 
 export async function createUsuario(req, res) {
-  const { name, done, projectId } = req.body;
+  const { nombre, correo, contrasena,estado } = req.body;
   try {
     const newUsuario = await Usuario.create({
-      projectId,
-      name,
-      done,
+      nombre,
+      correo,
+      contrasena,
+      estado,
     });
     res.json(newUsuario);
   } catch (error) {
@@ -50,7 +52,7 @@ export async function updateUsuario(req, res) {
 
   try {
     const Usuario = await Usuario.findOne({
-      attributes: ['name', 'projectId', 'done', 'id'],
+      attributes: ['nombre', 'correo', 'contrasena','estado'],
       where: { id },
     });
 
@@ -70,7 +72,7 @@ export async function deleteUsuario(req, res) {
   const { id } = req.params;
   try {
     await Usuario.destroy({
-      where: { projectId: id },
+      where: { id },
     });
     return res.sendStatus(204);
   } catch (error) {

@@ -5,7 +5,7 @@ import {
   getUsuario,
   updateUsuario,
   deleteUsuario,
-} from '../controllers/Usuario.controller.js';
+} from '../controllers/usuarios.controller.js';
 
 const router = Router();
 

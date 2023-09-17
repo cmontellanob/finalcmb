@@ -3,7 +3,7 @@ import { Categoria } from '../models/Categoria.js';
 export async function getCategorias(req, res) {
   try {
     const Categorias = await Categoria.findAll({
-      attributes: ['id', 'projectId', 'name', 'done'],
+      attributes: ['id', 'nombre'],
       order: [['id', 'DESC']],
     });
 
@@ -16,12 +16,12 @@ export async function getCategorias(req, res) {
 }
 
 export async function createCategoria(req, res) {
-  const { name, done, projectId } = req.body;
+  const { nombre } = req.body;
   try {
     const newCategoria = await Categoria.create({
-      projectId,
-      name,
-      done,
+      
+      nombre,
+      
     });
     res.json(newCategoria);
   } catch (error) {
@@ -50,7 +50,7 @@ export async function updateCategoria(req, res) {
 
   try {
     const Categoria = await Categoria.findOne({
-      attributes: ['name', 'projectId', 'done', 'id'],
+      attributes: ['nombre', ],
       where: { id },
     });
 
@@ -70,7 +70,7 @@ export async function deleteCategoria(req, res) {
   const { id } = req.params;
   try {
     await Categoria.destroy({
-      where: { projectId: id },
+      where: { id: id },
     });
     return res.sendStatus(204);
   } catch (error) {
