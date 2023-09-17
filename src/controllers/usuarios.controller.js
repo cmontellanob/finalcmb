@@ -8,7 +8,7 @@ import 'dotenv/config';
 export async function getUsuarios(req, res) {
   try {
     const Usuarios = await Usuario.findAll({
-      attributes: ['id', 'nombre', 'correo', 'contrasena', 'estado'],
+      attributes: ['id', 'nombre', 'correo',  'estado'],
       order: [['id', 'DESC']],
     });
 
@@ -23,10 +23,12 @@ export async function getUsuarios(req, res) {
 export async function createUsuario(req, res) {
   const { nombre, correo, contrasena, estado } = req.body;
   try {
+    const hashedPassword = await bcrypt.hash(contrasena,10);
+    console.log(hashedPassword);
     const newUsuario = await Usuario.create({
       nombre,
       correo,
-      contrasena,
+      contrasena:hashedPassword,
       estado,
     });
     res.json(newUsuario);
@@ -42,11 +44,12 @@ export async function getUsuario(req, res) {
   try {
     const Usuario = await Usuario.findOne({
       where: { id },
+      attributes: ['id', 'nombre', 'correo', 'contrasena', 'estado'],
     });
     return res.json(Usuario);
   } catch (error) {
     res.status(500).json({
-      message: error.message,
+      message: "usuario no encontrado",
     });
   }
 }
@@ -55,8 +58,9 @@ export async function updateUsuario(req, res) {
   const { id } = req.params;
 
   try {
+    const hashedPassword = await bcrypt.hash(contrasena,10);
     const Usuario = await Usuario.findOne({
-      attributes: ['nombre', 'correo', 'contrasena', 'estado'],
+      attributes: ['nombre', 'correo', hashedPassword, 'estado'],
       where: { id },
     });
 
