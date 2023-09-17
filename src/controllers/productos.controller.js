@@ -10,6 +10,8 @@ export async function getProductos(req, res) {
 
     res.json(Productos);
   } catch (error) {
+    logger.error(error.message);
+    
     res.status(500).json({
       message: error.message,
     });
@@ -29,6 +31,8 @@ export async function createProducto(req, res) {
     });
     res.json(newProducto);
   } catch (error) {
+    logger.error(error.message);
+    
     res.status(500).json({
       message: error.message,
     });
@@ -51,6 +55,8 @@ export async function getProducto(req, res) {
     }
     return res.json(producto);
   } catch (error) {
+    logger.error(error.message);
+    
     res.status(500).json({
       message: error.message,
     });
@@ -72,6 +78,8 @@ export async function updateProducto(req, res) {
 
     return res.json(producto);
   } catch (error) {
+    logger.error(error.message);
+    
     res.status(500).json({
       message: error.message,
     });
@@ -86,6 +94,8 @@ export async function deleteProducto(req, res) {
     });
     return res.sendStatus(204);
   } catch (error) {
+    logger.error(error.message);
+    
     res.status(500).json({
       message: error.message,
     });

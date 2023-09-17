@@ -13,3 +13,6 @@ cp env.example .env y llena losdatos solicitados para elpuerto,lab ase de datos 
 
 ## 5. Ejecutar el proyectoen modo prueba
 npm run dev
+
+
+## 6. En la carpeta postman se encuentran todos los endpoints del proyecto

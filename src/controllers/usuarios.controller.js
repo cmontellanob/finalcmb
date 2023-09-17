@@ -3,6 +3,8 @@ import { Usuario } from '../models/Usuario.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import 'dotenv/config';
+import { Categoria } from '../models/Categoria.js';
+import { Producto } from '../models/Producto.js';
 
 
 export async function getUsuarios(req, res) {
@@ -14,6 +16,8 @@ export async function getUsuarios(req, res) {
 
     res.json(Usuarios);
   } catch (error) {
+    logger.error(error.message);
+    
     res.status(500).json({
       message: error.message,
     });
@@ -33,6 +37,8 @@ export async function createUsuario(req, res) {
     });
     res.json(newUsuario);
   } catch (error) {
+    logger.error(error.message);
+    
     res.status(500).json({
       message: error.message,
     });
@@ -48,6 +54,8 @@ export async function getUsuario(req, res) {
     });
     return res.json(Usuario);
   } catch (error) {
+    logger.error(error.message);
+    
     res.status(500).json({
       message: "usuario no encontrado",
     });
@@ -70,6 +78,8 @@ export async function updateUsuario(req, res) {
 
     return res.json(Usuario);
   } catch (error) {
+    logger.error(error.message);
+    
     res.status(500).json({
       message: error.message,
     });
@@ -84,6 +94,8 @@ export async function deleteUsuario(req, res) {
     });
     return res.sendStatus(204);
   } catch (error) {
+    logger.error(error.message);
+    
     res.status(500).json({
       message: error.message,
     });
@@ -112,6 +124,39 @@ export async function login(req, res) {
 
   res.json({ token });
 }
+// 
+export async function getUsuariosCategoria(req, res) {
+  const { id } = req.params;
+  try {
+    const categorias = await Categoria.findAll({
+      attributes: ['id',  'nombre'],
+      where: { usuario_id: id },
+    });
+    return res.json(categorias);
+  } catch (error) {
+    logger.error(error.message);
+    
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+}
 
+export async function getUsuariosProducto(req, res) {
+  const { id } = req.params;
+  try {
+    const productos = await Producto.findAll({
+      attributes: ['id',  'nombre','precio_unitario','estado'],
+      where: { usuario_id: id },
+    });
+    return res.json(productos);
+  } catch (error) {
+    logger.error(error.message);
+    
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+}
 
 
