@@ -34,10 +34,14 @@ export async function createCategoria(req, res) {
 export async function getCategoria(req, res) {
   const { id } = req.params;
   try {
-    const Categoria = await Categoria.findOne({
+    const categoria = await Categoria.findOne({
       where: { id },
     });
-    return res.json(Categoria);
+    if (categoria==null)
+    {
+      return res.status(404).json({ message: 'No se encuentra la categoria' });
+    }
+    return res.json(categoria);
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -49,16 +53,22 @@ export async function updateCategoria(req, res) {
   const { id } = req.params;
 
   try {
-    const Categoria = await Categoria.findOne({
+    const categoria = await Categoria.findOne({
       attributes: ['nombre', ],
       where: { id },
     });
+    if(!categoria){
+      return res.status(404).json({
+        message: 'No se encuentra la categoria',
+      });
+    }
 
-    Categoria.set(req.body);
 
-    await Categoria.save();
+    categoria.set(req.body);
 
-    return res.json(Categoria);
+    await categoria.save();
+
+    return res.json(categoria);
   } catch (error) {
     res.status(500).json({
       message: error.message,

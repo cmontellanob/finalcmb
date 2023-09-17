@@ -42,11 +42,14 @@ export async function getProducto(req, res) {
   console.log(id);
 
   try {
-    const Producto = await Producto.findOne({
+    const producto = await Producto.findOne({
       where: { id },
     });
-    
-    return res.json(Producto);
+    if (producto==null)
+    {
+      return res.status(404).json({ message: 'No se encuentra el producto' });
+    }
+    return res.json(producto);
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -58,16 +61,16 @@ export async function updateProducto(req, res) {
   const { id } = req.params;
 
   try {
-    const Producto = await Producto.findOne({
-      attributes: ['nombre', 'precio_unitario', 'estado'],
+    const producto = await Producto.findOne({
+      attributes: ['id','nombre', 'precio_unitario', 'estado'],
       where: { id },
     });
+    
+    producto.set(req.body);
 
-    Producto.set(req.body);
+    await producto.save();
 
-    await Producto.save();
-
-    return res.json(Producto);
+    return res.json(producto);
   } catch (error) {
     res.status(500).json({
       message: error.message,
