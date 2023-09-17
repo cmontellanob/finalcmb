@@ -13,6 +13,8 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // Routes
+
+
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/categorias', categoriasRoutes);
 app.use('/api/productos', productosRoutes);

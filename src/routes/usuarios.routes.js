@@ -5,6 +5,7 @@ import {
   getUsuario,
   updateUsuario,
   deleteUsuario,
+  login
 } from '../controllers/usuarios.controller.js';
 
 const router = Router();
@@ -19,5 +20,7 @@ router.put('/:id', updateUsuario);
 router.delete('/:id', deleteUsuario);
 
 router.get('/:id', getUsuario);
+
+router.post('/login', login);
 
 export default router;
