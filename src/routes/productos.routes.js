@@ -6,18 +6,18 @@ import {
   updateProducto,
   deleteProducto,
 } from '../controllers/productos.controller.js';
-
+import {verificarToken } from '../middleware/verifyToken.js';
 const router = Router();
 
 // Routes
-router.get('/', getProductos);
+router.get('/', verificarToken, getProductos);
 
-router.post('/', createProducto);
+router.post('/',verificarToken, createProducto);
 
-router.put('/:id', updateProducto);
+router.put('/:id',verificarToken, updateProducto);
 
-router.delete('/:id', deleteProducto);
+router.delete('/:id',verificarToken, deleteProducto);
 
-router.get('/:id', getProducto);
+router.get('/:id', verificarToken,getProducto);
 
 export default router;

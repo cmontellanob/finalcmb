@@ -1,9 +1,10 @@
 import { Producto } from '../models/Producto.js';
 
+
 export async function getProductos(req, res) {
   try {
     const Productos = await Producto.findAll({
-      attributes: ['id', 'projectId', 'name', 'done'],
+      attributes: ['id', 'nombre', 'precio_unitario', 'estado'],
       order: [['id', 'DESC']],
     });
 
@@ -16,12 +17,15 @@ export async function getProductos(req, res) {
 }
 
 export async function createProducto(req, res) {
-  const { name, done, projectId } = req.body;
+  console.log (req.usuario_id);
+  const { nombre, precio_unitario, estado,usuario_id} = req.body;
+  
   try {
     const newProducto = await Producto.create({
-      projectId,
-      name,
-      done,
+      nombre,
+      precio_unitario,
+      estado,
+      usuario_id
     });
     res.json(newProducto);
   } catch (error) {
@@ -32,11 +36,16 @@ export async function createProducto(req, res) {
 }
 
 export async function getProducto(req, res) {
+  console.log("entro");
+  console.log(req.params);
   const { id } = req.params;
+  console.log(id);
+
   try {
     const Producto = await Producto.findOne({
       where: { id },
     });
+    
     return res.json(Producto);
   } catch (error) {
     res.status(500).json({
@@ -50,7 +59,7 @@ export async function updateProducto(req, res) {
 
   try {
     const Producto = await Producto.findOne({
-      attributes: ['name', 'projectId', 'done', 'id'],
+      attributes: ['nombre', 'precio_unitario', 'estado'],
       where: { id },
     });
 
@@ -70,7 +79,7 @@ export async function deleteProducto(req, res) {
   const { id } = req.params;
   try {
     await Producto.destroy({
-      where: { projectId: id },
+      where: { id },
     });
     return res.sendStatus(204);
   } catch (error) {

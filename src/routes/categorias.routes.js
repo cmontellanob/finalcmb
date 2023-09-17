@@ -7,18 +7,21 @@ import {
     deleteCategoria
   } from '../controllers/categorias.controller.js';
 
+  import {verificarToken } from '../middleware/verifyToken.js';
+ 
 
+  
 const router = Router();
 
 // // Routes
-router.get('/', getCategorias);
+router.get('/', verificarToken,getCategorias);
 
-router.post('/', createCategoria);
+router.post('/',verificarToken, createCategoria);
 
-router.put('/:id', updateCategoria);
+router.put('/:id',verificarToken, updateCategoria);
 
-router.delete('/:id', deleteCategoria);
+router.delete('/:id',verificarToken, deleteCategoria);
 
-router.get('/:id', getCategoria);
+router.get('/:id', verificarToken, getCategoria);
 
  export default router;
