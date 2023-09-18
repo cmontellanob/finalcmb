@@ -220,7 +220,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\":\"mouse\",\r\n    \"precio_unitario\":100,\r\n    \"estado\":true\r\n}",
+							"raw": "{\r\n    \"nombre\":\"mouse\",\r\n    \"precio_unitario\":100,\r\n    \"estado\":true,\r\n    \"categoria_id\":2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -382,7 +382,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjk0OTgxMDk2LCJleHAiOjE2OTQ5ODQ2OTZ9.0MI3IFMILN1bWG9cS_ACH29k5TQ9nf316lfUiINagJs",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjk0OTk1NjEzLCJleHAiOjE2OTQ5OTkyMTN9.fpQopmbm-I_DGun7nwdNMQIw1QejCwso11szhLYjiD4",
 									"type": "string"
 								}
 							]
