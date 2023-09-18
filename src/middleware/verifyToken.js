@@ -12,7 +12,7 @@ if (typeof bearerHeader=='undefined') {
     const token=bearerHeader.split(' ')[1];
     const decoded = jwt.verify(token, process.env.SECRETO); 
     
-    req.body.usuario_id = decoded.id;
+    req.usuario_id = decoded.id;
     
     next();
   } catch (error) {

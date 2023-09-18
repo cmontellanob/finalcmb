@@ -19,15 +19,17 @@ export async function getProductos(req, res) {
 }
 
 export async function createProducto(req, res) {
-  console.log (req.usuario_id);
-  const { nombre, precio_unitario, estado,usuario_id} = req.body;
+ 
+  const { nombre, precio_unitario, estado,categoria_id} = req.body;
+  const { usuario_id} =req;
   
   try {
     const newProducto = await Producto.create({
       nombre,
       precio_unitario,
       estado,
-      usuario_id
+      usuario_id,
+      categoria_id
     });
     res.json(newProducto);
   } catch (error) {

@@ -146,6 +146,28 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Obtener Productos Categorias Usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/usuarios/2/productos/categorias",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"usuarios",
+								"2",
+								"productos",
+								"categorias"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -189,7 +211,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjk0OTc3Mzk3LCJleHAiOjE2OTQ5ODA5OTd9.KuCZHGJuCBiDVxMvuEHcn5b9MnUbW9qVdsiAJPHZwxw",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjk0OTkyOTQyLCJleHAiOjE2OTQ5OTY1NDJ9.o82-NmT17gp0SylYEFILUuW4CGJXD_uZa_5I1LKY5Z4",
 									"type": "string"
 								}
 							]
@@ -331,7 +353,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjk0OTgxMDk2LCJleHAiOjE2OTQ5ODQ2OTZ9.0MI3IFMILN1bWG9cS_ACH29k5TQ9nf316lfUiINagJs",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjk0OTk1NjEzLCJleHAiOjE2OTQ5OTkyMTN9.fpQopmbm-I_DGun7nwdNMQIw1QejCwso11szhLYjiD4",
 									"type": "string"
 								}
 							]

@@ -6,8 +6,9 @@ import {
   updateUsuario,
   deleteUsuario,
   login,
-  getUsuariosCategoria,
-  getUsuariosProducto
+  getUsuarioCategorias,
+  getUsuarioProductos,
+  getUsuarioProductosCategorias
 } from '../controllers/usuarios.controller.js';
 
 const router = Router();
@@ -24,8 +25,9 @@ router.delete('/:id', deleteUsuario);
 
 router.get('/:id', getUsuario);
 
-router.get('/:id/categorias', getUsuariosCategoria);
-router.get('/:id/productos', getUsuariosProducto);
+router.get('/:id/categorias', getUsuarioCategorias);
+router.get('/:id/productos', getUsuarioProductos);
+router.get('/:id/productos/categorias', getUsuarioProductosCategorias);
 
 
 router.post('/login', login);

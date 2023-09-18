@@ -19,10 +19,12 @@ export async function getCategorias(req, res) {
 
 export async function createCategoria(req, res) {
   const { nombre } = req.body;
+  const { usuario_id} =req;
   try {
     const newCategoria = await Categoria.create({
       
       nombre,
+      usuario_id
       
     });
     res.json(newCategoria);

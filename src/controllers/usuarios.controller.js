@@ -10,14 +10,14 @@ import { Producto } from '../models/Producto.js';
 export async function getUsuarios(req, res) {
   try {
     const Usuarios = await Usuario.findAll({
-      attributes: ['id', 'nombre', 'correo',  'estado'],
+      attributes: ['id', 'nombre', 'correo', 'estado'],
       order: [['id', 'DESC']],
     });
 
     res.json(Usuarios);
   } catch (error) {
     logger.error(error.message);
-    
+
     res.status(500).json({
       message: error.message,
     });
@@ -27,18 +27,18 @@ export async function getUsuarios(req, res) {
 export async function createUsuario(req, res) {
   const { nombre, correo, contrasena, estado } = req.body;
   try {
-    const hashedPassword = await bcrypt.hash(contrasena,10);
+    const hashedPassword = await bcrypt.hash(contrasena, 10);
     console.log(hashedPassword);
     const newUsuario = await Usuario.create({
       nombre,
       correo,
-      contrasena:hashedPassword,
+      contrasena: hashedPassword,
       estado,
     });
     res.json(newUsuario);
   } catch (error) {
     logger.error(error.message);
-    
+
     res.status(500).json({
       message: error.message,
     });
@@ -55,7 +55,7 @@ export async function getUsuario(req, res) {
     return res.json(Usuario);
   } catch (error) {
     logger.error(error.message);
-    
+
     res.status(500).json({
       message: "usuario no encontrado",
     });
@@ -66,7 +66,7 @@ export async function updateUsuario(req, res) {
   const { id } = req.params;
 
   try {
-    const hashedPassword = await bcrypt.hash(contrasena,10);
+    const hashedPassword = await bcrypt.hash(contrasena, 10);
     const Usuario = await Usuario.findOne({
       attributes: ['nombre', 'correo', hashedPassword, 'estado'],
       where: { id },
@@ -79,7 +79,7 @@ export async function updateUsuario(req, res) {
     return res.json(Usuario);
   } catch (error) {
     logger.error(error.message);
-    
+
     res.status(500).json({
       message: error.message,
     });
@@ -95,7 +95,7 @@ export async function deleteUsuario(req, res) {
     return res.sendStatus(204);
   } catch (error) {
     logger.error(error.message);
-    
+
     res.status(500).json({
       message: error.message,
     });
@@ -124,35 +124,60 @@ export async function login(req, res) {
 
   res.json({ token });
 }
-// 
-export async function getUsuariosCategoria(req, res) {
+
+export async function getUsuarioCategorias(req, res) {
   const { id } = req.params;
   try {
     const categorias = await Categoria.findAll({
-      attributes: ['id',  'nombre'],
+      attributes: ['id', 'nombre'],
       where: { usuario_id: id },
     });
     return res.json(categorias);
   } catch (error) {
     logger.error(error.message);
-    
+
     res.status(500).json({
       message: error.message,
     });
   }
 }
 
-export async function getUsuariosProducto(req, res) {
+export async function getUsuarioProductos(req, res) {
   const { id } = req.params;
   try {
     const productos = await Producto.findAll({
-      attributes: ['id',  'nombre','precio_unitario','estado'],
+      attributes: ['id', 'nombre', 'precio_unitario', 'estado'],
       where: { usuario_id: id },
     });
     return res.json(productos);
   } catch (error) {
     logger.error(error.message);
-    
+
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+}
+
+export async function getUsuarioProductosCategorias(req, res) {
+  const { id } = req.params;
+  try {
+    const productos = await Producto.findAll({
+      attributes: ['id', 'nombre', 'precio_unitario', 'estado'],
+      where: { usuario_id: id },
+    });
+    const categorias = await Categoria.findAll({
+      attributes: ['id', 'nombre'],
+      where: { usuario_id: id },
+    });
+    const respuesta = {
+      categorias: categorias,
+      productos: productos,
+    };
+    return res.json(respuesta);
+  } catch (error) {
+    logger.error(error.message);
+
     res.status(500).json({
       message: error.message,
     });
